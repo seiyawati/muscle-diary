@@ -24,7 +24,6 @@ import {
   AppointmentContent,
   FlexibleSpace,
 } from '../components/Organisms'
-
 const appointments = [
   {
     id: 0,

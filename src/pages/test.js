@@ -11,18 +11,18 @@ class Create extends React.Component {
     this.OnSubmit = this.OnSubmit.bind(this)
   }
   //登録ボタンが押されたら
-  OnSubmit(string) {
+  OnSubmit() {
     db.collection('users')
       .add({
-        name: string.name,
+        name: 'aaa',
       })
-      .then((doc) => {
-        console.log(`${doc.id}をDBに追加したよ!`)
-      })
+      //.then((doc) => {
+      //  console.log(`${doc.id}をDBに追加したよ!`)
+      //})
       .catch((error) => {
         console.log(error)
       })
-    print('clicked')
+    // print(string)
   }
 
   render() {
@@ -32,7 +32,7 @@ class Create extends React.Component {
         <Label for="name">氏名</Label>
         <Input type="text" name="name" id="name" />
         <Input type="email" email="email" id="email" />
-        <Button type="submit" onclick={this.OnSubmit}>
+        <Button type="submit" onClick={this.OnSubmit}>
           登録
         </Button>
       </div>
