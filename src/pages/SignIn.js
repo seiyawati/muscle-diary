@@ -1,4 +1,6 @@
 import React from 'react'
+import { withRouter } from 'react-router-dom'
+import firebase from '../plugins/firebase'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import {
   Avatar,
@@ -13,7 +15,11 @@ import {
   Grid,
   Typography,
 } from '@material-ui/core'
-import { GoogleLoginButton, TwitterLoginButton, FacebookLoginButton } from 'react-social-login-buttons'
+import {
+  GoogleLoginButton,
+  TwitterLoginButton,
+  FacebookLoginButton,
+} from 'react-social-login-buttons'
 import { makeStyles } from '@material-ui/core/styles'
 import { Copyright } from '../components/Atoms'
 
@@ -48,7 +54,24 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function SignInSide() {
+const SignInSide = (props) => {
+  const signInWithGoogle = () => {
+    // Googleプロバイダオブジェクトのインスタンスを作成
+    const provider = new firebase.auth.GoogleAuthProvider()
+    // ポップアップウィンドウでログインを行う場合はsignInWithPopupを呼び出す
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then((user) => {
+        alert('success : ' + user.user.displayName + 'さんでログインしました')
+        // console.log(props.history)
+        props.history.push('/')
+      })
+      .catch((error) => {
+        alert(error.message)
+      })
+  }
+
   const classes = useStyles()
 
   return (
@@ -63,21 +86,18 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             ログイン
           </Typography>
-          <GoogleLoginButton align="center" iconSize={'20'} size={'40px'}>
+          <GoogleLoginButton
+            align="center"
+            iconSize={'20'}
+            size={'40px'}
+            onClick={() => signInWithGoogle()}
+          >
             <span style={{ fontSize: 16 }}>Googleでログイン</span>
           </GoogleLoginButton>
-          <TwitterLoginButton
-            align="center"
-            iconSize={'20px'}
-            size={'40px'}
-          >
+          <TwitterLoginButton align="center" iconSize={'20px'} size={'40px'}>
             <span style={{ fontSize: 16 }}>Twitterでログイン</span>
           </TwitterLoginButton>
-          <FacebookLoginButton
-            align="center"
-            iconSize={'20px'}
-            size={'40px'}
-          >
+          <FacebookLoginButton align="center" iconSize={'20px'} size={'40px'}>
             <span style={{ fontSize: 16 }}>Facebookでログイン</span>
           </FacebookLoginButton>
           <form className={classes.form} noValidate>
@@ -87,7 +107,7 @@ export default function SignInSide() {
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="メールアドレス"
               name="email"
               autoComplete="email"
               autoFocus
@@ -98,14 +118,14 @@ export default function SignInSide() {
               required
               fullWidth
               name="password"
-              label="Password"
+              label="パスワード"
               type="password"
               id="password"
               autoComplete="current-password"
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              label="パスワードを保存する"
             />
             <Button
               type="submit"
@@ -114,17 +134,17 @@ export default function SignInSide() {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              ログイン
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  パスワードをお忘れですか？
                 </Link>
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  {'アカウントをお持ちでない方は登録してください。'}
                 </Link>
               </Grid>
             </Grid>
@@ -137,3 +157,5 @@ export default function SignInSide() {
     </Grid>
   )
 }
+
+export default withRouter(SignInSide)

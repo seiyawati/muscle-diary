@@ -1,19 +1,18 @@
+import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Calender, NotFound, Home } from './pages'
-
-const Auth = (props) => <div>{props.children}</div>
+import { Calender, NotFound, SignIn } from './pages'
+import { AuthProvider } from './auth/AuthProvider'
+import PrivateRoute from './auth/PrivateRoute'
 
 const App = () => (
-  <Router>
-    <Switch>
-      <Route exact path="/signin" component={Home} />
-      <Auth>
-        <Switch>
-          <Route exact path="/" component={Calender} />
-          <Route component={NotFound} />
-        </Switch>
-      </Auth>
-    </Switch>
-  </Router>
+  <AuthProvider>
+    <Router>
+      <Switch>
+        <PrivateRoute exact path="/" component={Calender} />
+        <Route exact path="/signin" component={SignIn} />
+        <PrivateRoute component={NotFound} />
+      </Switch>
+    </Router>
+  </AuthProvider>
 )
 export default App
