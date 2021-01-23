@@ -27,7 +27,7 @@ const Signin = () => {
       </div>
       <div className="signin_button">
         <img
-          src="../btn_google_signin.png"
+          src="../../public/btn_google_signin.png"
           onClick={() => signInWithGoogle()}
           alt="google signin"
         />
