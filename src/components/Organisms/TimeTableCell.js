@@ -18,7 +18,7 @@ const CellBase = React.memo(({ classes, startDate, formatDate, otherMonth }) => 
         [classes.cloudBack]: iconId === 2,
         [classes.opacity]: otherMonth,
       })}
-      onDoubleClick
+      // onDoubleClick
     >
       <div className={classes.content}>
         <WeatherIcon classes={classes} id={iconId} />
