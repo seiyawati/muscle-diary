@@ -3,13 +3,14 @@ import 'firebase/firestore'
 import 'firebase/auth'
 
 var firebaseConfig = {
-  apiKey: 'AIzaSyApEmDDpmnQTar-ov4_GC1uC7h5hkv_us4',
-  authDomain: 'muscle-diary-eacb2.firebaseapp.com',
-  projectId: 'muscle-diary-eacb2',
-  storageBucket: 'muscle-diary-eacb2.appspot.com',
-  messagingSenderId: '274479441978',
-  appId: '1:274479441978:web:30cb2c517f090ad4b6ad03',
-  measurementId: 'G-YSM94XFGY3',
+  apiKey: 'process.env.REACT_APP_FIREBASE_KEY',
+  authDomain: 'REACT_APP_FIREBASE_PROJECT_ID.firebaseapp.com',
+  // databaseURL: 'https://REACT_APP_FIREBASE_PROJECT_ID.firebaseio.com',
+  projectId: 'process.env.REACT_APP_FIREBASE_PROJECT_ID',
+  storageBucket: 'REACT_APP_FIREBASE_PROJECT_ID.appspot.com',
+  messagingSenderId: 'REACT_APP_FIREBASE_SENDER_ID',
+  appId: 'process.env.REACT_APP_APP_ID',
+  measurementId: 'process.env.REACT_APP_MEASUREMENT_ID',
 }
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig)
