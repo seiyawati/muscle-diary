@@ -1,5 +1,5 @@
 import React from 'react'
-// import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 import firebase from '../plugins/firebase'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import {
@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function SignInSide() {
+const SignInSide = () => {
   const signInWithGoogle = () => {
     // Googleプロバイダオブジェクトのインスタンスを作成
     const provider = new firebase.auth.GoogleAuthProvider()
@@ -64,11 +64,10 @@ export default function SignInSide() {
       .signInWithPopup(provider)
       .then((user) => {
         alert('success : ' + user.user.displayName + 'さんでログインしました')
-        return <Redirect to="/calender" />
+        this.props.history.push('/')
       })
       .catch((error) => {
         alert(error.message)
-        return <Redirect to="/" />
       })
   }
 
@@ -86,7 +85,12 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             ログイン
           </Typography>
-          <GoogleLoginButton align="center" iconSize={'20'} size={'40px'} onClick={() => signInWithGoogle()}>
+          <GoogleLoginButton
+            align="center"
+            iconSize={'20'}
+            size={'40px'}
+            onClick={() => signInWithGoogle()}
+          >
             <span style={{ fontSize: 16 }}>Googleでログイン</span>
           </GoogleLoginButton>
           <TwitterLoginButton align="center" iconSize={'20px'} size={'40px'}>
@@ -152,3 +156,5 @@ export default function SignInSide() {
     </Grid>
   )
 }
+
+export default withRouter(SignInSide)

@@ -5,8 +5,8 @@ import { Calender, NotFound, Home } from './pages'
 const App = () => (
   <Router>
     <Switch>
-      <Route exact path="/" component={Home} />
       <Route exact path="/calender" component={Calender} />
+      <Route exact path="/" component={Home} />
       <Route component={NotFound} />
     </Switch>
   </Router>
