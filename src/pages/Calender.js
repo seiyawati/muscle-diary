@@ -24,6 +24,7 @@ import {
   AppointmentContent,
   FlexibleSpace,
 } from '../components/Organisms'
+import { withRouter } from 'react-router-dom'
 
 const appointments = [
   {
@@ -131,7 +132,7 @@ const resources = [
 //   <MonthView.DayScaleCell {...props} style={{ textAlign: 'center', fontWeight: 'bold' }} />
 // )
 
-export default class Calender extends React.PureComponent {
+class Calender extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -222,3 +223,5 @@ export default class Calender extends React.PureComponent {
     )
   }
 }
+
+export default withRouter(Calender)
