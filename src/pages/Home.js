@@ -73,7 +73,7 @@ export default function SignInSide() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            ログイン
           </Typography>
           <GoogleLoginButton align="center" iconSize={'20'} size={'40px'}>
             <span style={{ fontSize: 16 }}>Googleでログイン</span>
