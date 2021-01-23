@@ -23,7 +23,7 @@ import {
   Appointment,
   AppointmentContent,
   FlexibleSpace,
-} from '../components/Organisms
+} from '../components/Organisms'
 import { withRouter } from 'react-router-dom'
 
 const appointments = [
