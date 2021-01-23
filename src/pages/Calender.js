@@ -51,8 +51,10 @@ const appointments = [
   {
     id: 3,
     title: '腹筋(2/2)',
-    startDate: '2021-01-23T21:00',
-    endDate: '2021-01-23T21:05',
+    startDate: new Date(2021, 0, 23, 21, 0),
+    endDate: new Date(2021, 0, 23, 21, 5),
+    // startDate: '2021-01-23T21:00',
+    // endDate: '2021-01-23T21:05',
     tagId: 2,
   },
   {
@@ -128,10 +130,15 @@ const resources = [
   },
 ]
 
+const conf_messages = {
+  deleteButton: '削除',
+  cancelButton: 'キャンセル',
+  confirmDeleteMessage: '本当に削除しますか？',
+}
+
 // const DayScaleCell = (props) => (
 //   <MonthView.DayScaleCell {...props} style={{ textAlign: 'center', fontWeight: 'bold' }} />
 // )
-
 class Calender extends React.Component {
   constructor(props) {
     super(props)
@@ -192,6 +199,7 @@ class Calender extends React.Component {
           <ConfirmationDialog
             // 追加フォームを閉じるときは無視
             ignoreCancel
+            messages={conf_messages}
           />
 
           <Appointments
