@@ -25,6 +25,7 @@ import {
   FlexibleSpace,
 } from '../components/Organisms'
 import { withRouter } from 'react-router-dom'
+import { addtoDB, fetchData, deletefromDB } from '../contexts/Appointments'
 
 const appointments = [
   {
@@ -99,6 +100,16 @@ const appointments = [
     startDate: new Date(2021, 0, 12, 21, 0),
     endDate: new Date(2021, 0, 12, 21, 5),
     url: 'https://youtu.be/JDc-xApip7k',
+    tagId: 4,
+  },
+]
+
+const appointments2 = [
+  {
+    id: 0,
+    title: '腕立て伏せ(1/2)',
+    startDate: new Date(2021, 0, 20, 21, 0),
+    endDate: new Date(2021, 0, 20, 21, 5),
     tagId: 4,
   },
 ]
@@ -219,29 +230,75 @@ const BasicLayout = ({ onFieldChange, appointmentData, ...restProps }) => {
 // const DayScaleCell = (props) => (
 //   <MonthView.DayScaleCell {...props} style={{ textAlign: 'center', fontWeight: 'bold' }} />
 // )
+
+// propsはコンポーネントが生成されるときに親から渡されるオブジェクト. 不変
+// stateはコンポーネント内で保持されるオブジェクト, 可変
 class Calender extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       data: appointments,
     }
+    /** 
+    fetchData().then(
+      (value) => {
+        console.log('value', appointments2)
+        console.log('value', appointments)
+        // console.log('value', value)
+        this.setState({
+          data: value,
+        })
+      },
+      (error) => {
+        console.error('error:', error.message)
+      }
+    )
+    */
   }
 
+  componentDidMount() {
+    console.log('componentDidMount now!')
+    fetchData().then(
+      (value) => {
+        console.log('value', appointments2)
+        this.setState({
+          data: value,
+        })
+      },
+      (error) => {
+        console.error('error:', error.message)
+      }
+    )
+  }
+
+  // commitに変更があったか, に関するイベントハンドラ
+  // Calenderインスタンスにバインドする
   commitChanges = ({ added, changed, deleted }) => {
+    console.log('監視中2')
     this.setState((state) => {
       let { data } = state
       if (added) {
         const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0
         data = [...data, { id: startingAddedId, ...added }]
+        console.log('ADDED!!!')
+        addtoDB({ ...added })
+        // console.log({ id: startingAddedId, ...added })
       }
       if (changed) {
+        // map：配列を展開して, それぞれに関数を適用する
+        //     それぞれの要素がユニークなキーを持ってないとバグる
+        // appointの中で, 変更があったものは変更を反映, そうでないものはそのままにしてdataを返す
         data = data.map((appointment) =>
           changed[appointment.id] ? { ...appointment, ...changed[appointment.id] } : appointment
         )
       }
       if (deleted !== undefined) {
+        console.log('削除対象あり')
         data = data.filter((appointment) => appointment.id !== deleted)
+        const deldata = data.filter((appointment) => appointment.id == deleted)
+        deldata.map((appointment) => deletefromDB(appointment.id))
       }
+      this.setState(data)
       return { data }
     })
   }
