@@ -1,5 +1,6 @@
 import React from 'react'
 import firebase from 'firebase/app'
+import { withRouter } from 'react-router-dom'
 
 const Signin = () => {
   const signInWithGoogle = () => {
@@ -35,4 +36,4 @@ const Signin = () => {
   )
 }
 
-export default Signin
+export default withRouter(Signin)
