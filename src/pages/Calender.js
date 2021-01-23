@@ -26,6 +26,10 @@ import {
 } from '../components/Organisms'
 import { withRouter } from 'react-router-dom'
 import { addtoDB, fetchData, deletefromDB } from '../contexts/Appointments'
+// import { addUser } from '../contexts/Users'
+import firebase from '../plugins/firebase'
+
+var Cuser
 
 const appointments = [
   {
@@ -258,7 +262,28 @@ class Calender extends React.Component {
 
   componentDidMount() {
     console.log('componentDidMount now!')
-    fetchData().then(
+
+    Cuser = firebase.auth().currentUser.uid
+    console.log('USER:', Cuser)
+    /** 
+    db.collection('users')
+      .where('uid', '==', Cuser)
+      .get()
+      .then((querySnapshot) => {
+        if (querySnapshot.empty) {
+          console.log('重複するusername無し:', querySnapshot)
+          this.validation.username = true
+          addUser(Cuser)
+        } else {
+          console.log('重複するusername有り', querySnapshot)
+          this.validation.username = false
+        }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+      */
+    fetchData(Cuser).then(
       (value) => {
         console.log('value', appointments2)
         this.setState({
@@ -278,10 +303,10 @@ class Calender extends React.Component {
     this.setState((state) => {
       let { data } = state
       if (added) {
-        const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0
-        data = [...data, { id: startingAddedId, ...added }]
+        // const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0
+        // data = [...data, { id: startingAddedId, ...added }]
         console.log('ADDED!!!')
-        addtoDB({ ...added })
+        addtoDB({ ...added }, Cuser)
         // console.log({ id: startingAddedId, ...added })
       }
       if (changed) {
@@ -294,11 +319,27 @@ class Calender extends React.Component {
       }
       if (deleted !== undefined) {
         console.log('削除対象あり')
+        // console.log('ALLDATA', data)
+        var _ = require('lodash')
+        const alldata = data
         data = data.filter((appointment) => appointment.id !== deleted)
-        const deldata = data.filter((appointment) => appointment.id == deleted)
+        // console.log('DATA', data)
+        // lodashの差集合により削除するデータを求める
+        const deldata = _.difference(alldata, data)
+        // console.log('DELDATA', deldata)
         deldata.map((appointment) => deletefromDB(appointment.id))
       }
-      this.setState(data)
+      fetchData(Cuser).then(
+        (value) => {
+          console.log('value', appointments2)
+          this.setState({
+            data: value,
+          })
+        },
+        (error) => {
+          console.error('error:', error.message)
+        }
+      )
       return { data }
     })
   }
