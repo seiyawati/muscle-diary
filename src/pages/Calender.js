@@ -32,6 +32,7 @@ const appointments = [
     title: '腕立て伏せ(1/2)',
     startDate: new Date(2021, 0, 20, 21, 0),
     endDate: new Date(2021, 0, 20, 21, 5),
+    url: 'https://youtu.be/JDc-xApip7k',
     tagId: 4,
   },
   {
@@ -39,6 +40,7 @@ const appointments = [
     title: '腕立て伏せ(2/2)',
     startDate: new Date(2021, 0, 20, 21, 0),
     endDate: new Date(2021, 0, 20, 21, 5),
+    url: 'https://youtu.be/MutTO8nsXLE',
     tagId: 4,
   },
   {
@@ -46,6 +48,7 @@ const appointments = [
     title: '腹筋(1/2)',
     startDate: new Date(2021, 0, 20, 21, 0),
     endDate: new Date(2021, 0, 20, 21, 5),
+    url: 'https://youtu.be/YIm51_aCja4',
     tagId: 2,
   },
   {
@@ -55,6 +58,7 @@ const appointments = [
     endDate: new Date(2021, 0, 23, 21, 5),
     // startDate: '2021-01-23T21:00',
     // endDate: '2021-01-23T21:05',
+    url: 'https://youtu.be/0F2uBW_wh3Y',
     tagId: 2,
   },
   {
@@ -62,6 +66,7 @@ const appointments = [
     title: '腕立て伏せ(1/2)',
     startDate: new Date(2021, 0, 17, 21, 0),
     endDate: new Date(2021, 0, 17, 21, 5),
+    url: 'https://youtu.be/JDc-xApip7k',
     tagId: 4,
   },
   {
@@ -69,6 +74,7 @@ const appointments = [
     title: '腕立て伏せ(1/2)',
     startDate: new Date(2021, 0, 14, 21, 0),
     endDate: new Date(2021, 0, 14, 21, 5),
+    url: 'https://youtu.be/JDc-xApip7k',
     tagId: 4,
   },
   {
@@ -76,6 +82,7 @@ const appointments = [
     title: 'スクワット(1/2)',
     startDate: new Date(2021, 0, 14, 21, 0),
     endDate: new Date(2021, 0, 14, 21, 5),
+    url: 'https://youtu.be/xGnfPpjki34',
     tagId: 1,
   },
   {
@@ -83,6 +90,7 @@ const appointments = [
     title: '背筋(1/2)',
     startDate: new Date(2021, 0, 12, 21, 0),
     endDate: new Date(2021, 0, 12, 21, 5),
+    url: 'https://youtu.be/CuuBp4Dkgz0',
     tagId: 3,
   },
   {
@@ -90,6 +98,7 @@ const appointments = [
     title: '腕立て伏せ(1/2)',
     startDate: new Date(2021, 0, 12, 21, 0),
     endDate: new Date(2021, 0, 12, 21, 5),
+    url: 'https://youtu.be/JDc-xApip7k',
     tagId: 4,
   },
 ]
@@ -134,6 +143,77 @@ const conf_messages = {
   deleteButton: '削除',
   cancelButton: 'キャンセル',
   confirmDeleteMessage: '本当に削除しますか？',
+}
+
+const appo_form_messages = {
+  detailsLabel: 'タイトル',
+  moreInformationLabel: '',
+}
+
+const TextEditor = (props) => {
+  console.log('====================================')
+  console.log(props)
+  console.log('====================================')
+  // eslint-disable-next-line react/destructuring-assignment
+  if (props.type === 'multilineTextEditor') {
+    return null
+  }
+  if (props.type === 'titleTextEditor') {
+    console.log('====================================')
+    console.log(props.placeholder)
+    console.log('====================================')
+    // Object.assign(props, { placeholder: 'タイトル' })
+    return <AppointmentForm.TextEditor {...props} placeholder="タイトル" />
+  }
+  return <AppointmentForm.TextEditor {...props} />
+}
+
+// const BooleanEditor = ({ ...props }) => {
+//   console.log('====================================')
+//   console.log(props)
+//   console.log('====================================')
+
+//   return null
+// }
+
+// const RecurrenceLayout = ({ ...props }) => {
+//   console.log('====================================')
+//   console.log(props)
+//   console.log('====================================')
+
+//   return null
+// }
+
+const BasicLayout = ({ onFieldChange, appointmentData, ...restProps }) => {
+  const onCustomFieldChange = (nextValue) => {
+    onFieldChange({ url: nextValue })
+  }
+
+  // console.log('====================================')
+  // console.log(restProps.booleanEditorComponent, 'boolean')
+  // console.log(restProps.dateEditorComonent, 'date editor')
+  // console.log(restProps.labelComponent, 'label')
+  // console.log(restProps.resourceEditorComponent, 'resource editor')
+  // console.log(restProps.selectComponent, 'select')
+  // console.log(restProps.textEditorComponent, 'text editor')
+  // console.log('====================================')
+
+  return (
+    <AppointmentForm.BasicLayout
+      appointmentData={appointmentData}
+      onFieldChange={onFieldChange}
+      {...restProps}
+      // booleanEditorComponent={BooleanEditor}
+      booleanEditorComponent={() => null}
+    >
+      <AppointmentForm.Label text="動画リンク" type="title" />
+      <AppointmentForm.TextEditor
+        value={appointmentData.url}
+        onValueChange={onCustomFieldChange}
+        placeholder="https://youtu.be/xxxxxxxx"
+      />
+    </AppointmentForm.BasicLayout>
+  )
 }
 
 // const DayScaleCell = (props) => (
@@ -191,16 +271,9 @@ class Calender extends React.Component {
           <DateNavigator />
           <TodayButton />
 
-          {/* 繰り返しのアポがある時にいれるやつ 一括操作ができる */}
-          {/* <EditRecurrenceMenu /> */}
-
           {/* 繰り返さないとき 削除の時の確認も必要 */}
           <IntegratedEditing />
-          <ConfirmationDialog
-            // 追加フォームを閉じるときは無視
-            ignoreCancel
-            messages={conf_messages}
-          />
+          <ConfirmationDialog ignoreCancel messages={conf_messages} />
 
           <Appointments
             appointmentComponent={Appointment}
@@ -214,7 +287,20 @@ class Calender extends React.Component {
             showOpenButton
           />
           {/* アポを編集するフォームが出る これに何を載せるか考えたい */}
-          <AppointmentForm />
+          <AppointmentForm
+            basicLayoutComponent={BasicLayout}
+            textEditorComponent={TextEditor}
+            // Monthlyとか選ぶやつ
+            // selectComponent={SelectComponent}
+            // 削除、保存、キャンセルのボタン
+            // commandButtonComponent
+
+            // booleanEditorComponent={BooleanEditor}
+            recurrenceLayoutComponent={() => null}
+            // recurrenceLayoutComponent={RecurrenceLayout}
+            // resourceEditorComponent={ResourceEditor}
+            messages={appo_form_messages}
+          />
 
           <Resources data={resources} />
 

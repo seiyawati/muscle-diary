@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const SignInSide = () => {
+const SignInSide = (props) => {
   const signInWithGoogle = () => {
     // Googleプロバイダオブジェクトのインスタンスを作成
     const provider = new firebase.auth.GoogleAuthProvider()
@@ -64,7 +64,8 @@ const SignInSide = () => {
       .signInWithPopup(provider)
       .then((user) => {
         alert('success : ' + user.user.displayName + 'さんでログインしました')
-        this.props.history.push('/')
+        // console.log(props.history)
+        props.history.push('/')
       })
       .catch((error) => {
         alert(error.message)
