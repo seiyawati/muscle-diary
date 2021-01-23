@@ -1,6 +1,6 @@
 import React from 'react'
-import { Label, Input, Button } from 'reactstrap'
-import { db } from '../plugins/firebase'
+import { Input, Button } from '@material-ui/core'
+import { db } from '../plugins/firebase' // eslint-disable-line
 
 class Create extends React.Component {
   constructor(props) {
@@ -22,14 +22,13 @@ class Create extends React.Component {
       .catch((error) => {
         console.log(error)
       })
-    // print(string)
+    // print('aaa')
   }
 
   render() {
     return (
       <div className="container">
         <h3 className="text-center my-5">新規作成</h3>
-        <Label for="name">氏名</Label>
         <Input type="text" name="name" id="name" />
         <Input type="email" email="email" id="email" />
         <Button type="submit" onClick={this.OnSubmit}>
