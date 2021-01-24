@@ -10,7 +10,7 @@ import { Grid, Link } from '@material-ui/core'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    backgroundColor: '#ADF3FF',
+    backgroundColor: '#2196F3',
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   footer: {
-    backgroundColor: '#ADF3FF',
+    backgroundColor: '#2196F3',
   },
 }))
 
