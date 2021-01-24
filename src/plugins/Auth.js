@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import firebase from '../plugins/firebase'
+import { firebase } from './firebase'
 
 // contextの作成
 export const AuthContext = React.createContext()
@@ -8,19 +8,9 @@ export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null)
 
   // ユーザーをログインさせる関数
-  const login = async (history) => {
-    const provider = new firebase.auth.GoogleAuthProvider()
+  const login = async (email, password, history) => {
     try {
-      await firebase.auth().signInWithPopup(provider)
-      history.push('/')
-    } catch (error) {
-      alert(error)
-    }
-  }
-
-  const emailLogin = async (email, password, history) => {
-    try {
-      await firebase.auth().signInWithEmailAndPassword(email, password)
+      await app.auth().signInWithEmailAndPassword(email, password)
       history.push('/')
     } catch (error) {
       alert(error)
@@ -28,7 +18,7 @@ export const AuthProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(setCurrentUser)
+    app.auth().onAuthStateChanged(setCurrentUser)
   }, [])
 
   return (
@@ -36,7 +26,7 @@ export const AuthProvider = ({ children }) => {
     <AuthContext.Provider
       value={{
         login: login,
-        emailLogin: emailLogin,
+        signup: signup,
         currentUser,
       }}
     >
