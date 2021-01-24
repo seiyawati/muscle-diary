@@ -55,8 +55,8 @@ const SignInSide = (props) => {
         // console.log(props.history)
         props.history.push('/')
       })
-      .catch((error) => {
-        alert(error.message)
+      .catch(() => {
+        alert('ログインできませんでした。')
       })
   }
 
@@ -83,8 +83,9 @@ const SignInSide = (props) => {
             iconSize={'20'}
             size={'40px'}
             onClick={() => signInWithGoogle()}
+            style={{ background: "#CC4024" }}
           >
-            <span style={{ fontSize: 16 }}>Googleでログイン</span>
+            <span style={{ fontSize: 16, color: 'white' }}>Googleでログイン</span>
           </GoogleLoginButton>
           <TwitterLoginButton
             align="center"
