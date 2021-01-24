@@ -9,8 +9,8 @@ env:
   REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
   REACT_APP_APP_ID: ${{ secrets.REACT_APP_APP_ID }}
   REACT_APP_MEASUREMENT_ID: ${{ secrets.REACT_APP_MEASUREMENT_ID }}
-  REACT_APP_PROJECT_ID: ${{ secrets.PROJECT_ID }}
-  REACT_APP_SENDER_ID: ${{ secrets.SENDER_ID }}
+  REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID }}
+  REACT_APP_SENDER_ID: ${{ secrets.REACT_APP_SENDER_ID }}
 
 jobs:
   build:
