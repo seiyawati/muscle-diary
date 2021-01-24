@@ -24,6 +24,7 @@ import {
   AppointmentContent,
   FlexibleSpace,
   Navbar,
+  Footer,
 } from '../components/Organisms'
 import { withRouter } from 'react-router-dom'
 import { addtoDB, fetchData, deletefromDB } from '../contexts/Appointments'
@@ -430,6 +431,7 @@ class Calender extends React.Component {
             {/* <ViewSwitcher/> */}
           </Scheduler>
         </Paper>
+        <Footer />
       </Container>
     )
   }
