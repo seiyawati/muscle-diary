@@ -1,50 +1,24 @@
 # Muscle Diary
 
-## 動かし方
+![Deploy](https://github.com/SasakiPeter/muscle_diary/workflows/Deploy/badge.svg?branch=main)
 
-```shell
-$ npm install -g yarn
-$ yarn
-$ yarn start
-```
+[筋肉体操](https://www.youtube.com/watch?v=xGnfPpjki34&list=PLcynJ47QaWNtO61AsyfgUKJyIGWuyY7Ir&index=5)の記録をつける日記アプリです。
 
-## インストールしたパッケージ
+## release note
 
-```shell
-$ yarn add @devexpress/dx-react-core @devexpress/dx-react-scheduler @devexpress/dx-react-scheduler-material-ui @material-ui/core @material-ui/icons clsx
-```
+- ログイン認証機能
+- カレンダーへの記録機能
 
-## Issue
+## upcoming update
 
-- 背景に色を付けて、草生やすみたいにしたい
-  - TimeTableComponent を自作するとき、以下の問題に注意
-  - ダブルクリックした時、ちゃんと追加のモーダルが起動するか
-  - 今日の日付がわかるようになっているか
-    - [CurrentTimeIndicator](https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/guides/current-time-indication/)か、TableCell の問題か？
-    - デバッグに[TodayButton](https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/guides/date-navigation/)使うといいかも
-- アポクリック時のモーダルをカスタマイズ
-  - [AppointmentTooltip](https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/guides/appointment-tooltip/#customize-the-appearance)
-- アポ編集画面のカスタマイズ
-  - よく使うものとかは、選べるようにする
-  - [Customize the Appointment Form](https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/guides/editing/#customize-the-appointment-form)
-- 削除する時の確認ダイアログをカスタマイズ
-- zero duration appointment が monthview では表示されない
-  - [zero duration](https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/guides/appointments/#zero-duration-appointments)
-  - weekview とかなら表示できる
-- [locale](https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/reference/scheduler/)をいい感じにしたい
-  - ja-JP 悪くないんだけど、日にちにいちいち'日'ってつけるの鬱陶しい
-- 追加する時にシングルクリックでいいようにしたい
+- youtube 動画の視聴
+- 記録フォームの UX 向上
 
-## 各種リファレンス
+## 使用技術
 
-### アポ編集画面
-
-アポをクリックした時のモーダルのカスタマイズ
-
-[AppointmentTooltip](https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/guides/appointment-tooltip/#customize-the-appearance)
-
-### アポフォーム編集
-
-アポ編集画面のカスタマイズ
-
-[Customize the Appointment Form](https://devexpress.github.io/devextreme-reactive/react/scheduler/docs/guides/editing/#customize-the-appointment-form)
+- UI
+  - Material-ui
+- DB
+  - firestore
+- 認証
+  - firebase authentication
