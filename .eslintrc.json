@@ -13,5 +13,8 @@
       "error",
       "never"
     ]
-  }
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  },
 }
