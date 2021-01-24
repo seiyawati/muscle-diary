@@ -433,7 +433,7 @@ class Calender extends React.Component {
         // const startingAddedId = data.length > 0 ? data[data.length - 1].id + 1 : 0
         // data = [...data, { id: startingAddedId, ...added }]
         console.log('ADDED!!!')
-        addtoDB({ ...added }, Cuser)
+        addtoDB({ ...added }, Cuser, movie_list)
         // console.log({ id: startingAddedId, ...added })
       }
       if (changed) {
