@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Container, Paper } from '@material-ui/core'
+import { Container, Paper, Link, IconButton } from '@material-ui/core'
 import { EditingState, ViewState, IntegratedEditing } from '@devexpress/dx-react-scheduler'
 import {
   Scheduler,
@@ -29,6 +29,7 @@ import { withRouter } from 'react-router-dom'
 import { addtoDB, fetchData, deletefromDB } from '../contexts/Appointments'
 // import { addUser } from '../contexts/Users'
 import firebase from '../plugins/firebase'
+import YouTubeIcon from '@material-ui/icons/YouTube'
 
 var Cuser
 
@@ -164,6 +165,18 @@ const conf_messages = {
 const appo_form_messages = {
   detailsLabel: 'タイトル',
   moreInformationLabel: '',
+}
+
+const Header = ({ appointmentData, ...restProps }) => {
+  return (
+    <AppointmentTooltip.Header {...restProps} appointmentData={appointmentData}>
+      <Link href={appointmentData.url}>
+        <IconButton>
+          <YouTubeIcon />
+        </IconButton>
+      </Link>
+    </AppointmentTooltip.Header>
+  )
 }
 
 const TextEditor = (props) => {
@@ -383,11 +396,14 @@ class Calender extends React.Component {
             />
             {/* アポクリックで、表示するモーダル */}
             <AppointmentTooltip
-              // 表示するアイコン 内容も変えられそう
               showCloseButton
               showDeleteButton
               showOpenButton
+              headerComponent={Header}
+              // contentComponent={Content}
+              // commandButtonComponent={CommandButtonTooltip}
             />
+
             {/* アポを編集するフォームが出る これに何を載せるか考えたい */}
             <AppointmentForm
               basicLayoutComponent={BasicLayout}
