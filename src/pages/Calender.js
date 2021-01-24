@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Paper } from '@material-ui/core'
+import { Container, Paper } from '@material-ui/core'
 import { EditingState, ViewState, IntegratedEditing } from '@devexpress/dx-react-scheduler'
 import {
   Scheduler,
@@ -23,6 +23,7 @@ import {
   Appointment,
   AppointmentContent,
   FlexibleSpace,
+  Navbar,
 } from '../components/Organisms'
 import { withRouter } from 'react-router-dom'
 import { addtoDB, fetchData, deletefromDB } from '../contexts/Appointments'
@@ -347,71 +348,73 @@ class Calender extends React.Component {
   render() {
     const { data } = this.state
     return (
-      <Paper>
-        <Scheduler
-          data={data}
-          // locale={'ja-JP'}
-        >
-          <EditingState onCommitChanges={this.commitChanges} />
-          <ViewState
-          // defaultCurrentDate="2018-07-17"
-          />
+      <Container>
+        <Navbar />
+        <Paper>
+          {/* <Paper classNeme={}> */}
+          <Scheduler
+            data={data}
+            // locale={'ja-JP'}
+          >
+            <EditingState onCommitChanges={this.commitChanges} />
+            <ViewState
+            // defaultCurrentDate="2018-07-17"
+            />
 
-          <MonthView
-          // 一つ一つのセルの背景を決められる
-          // timeTableCellComponent={TimeTableCell}
-          // dayScaleCellComponent={DayScaleCell}
-          />
+            <MonthView
+            // 一つ一つのセルの背景を決められる
+            // timeTableCellComponent={TimeTableCell}
+            // dayScaleCellComponent={DayScaleCell}
+            />
 
-          {/* <WeekView/> */}
+            {/* <WeekView/> */}
 
-          <Toolbar flexibleSpaceComponent={FlexibleSpace} />
-          <DateNavigator />
-          <TodayButton />
+            <Toolbar flexibleSpaceComponent={FlexibleSpace} />
+            <DateNavigator />
+            <TodayButton />
 
-          {/* 繰り返さないとき 削除の時の確認も必要 */}
-          <IntegratedEditing />
-          <ConfirmationDialog ignoreCancel messages={conf_messages} />
+            {/* 繰り返さないとき 削除の時の確認も必要 */}
+            <IntegratedEditing />
+            <ConfirmationDialog ignoreCancel messages={conf_messages} />
 
-          <Appointments
-            appointmentComponent={Appointment}
-            appointmentContentComponent={AppointmentContent}
-          />
-          {/* アポクリックで、表示するモーダル */}
-          <AppointmentTooltip
-            // 表示するアイコン 内容も変えられそう
-            showCloseButton
-            showDeleteButton
-            showOpenButton
-          />
-          {/* アポを編集するフォームが出る これに何を載せるか考えたい */}
-          <AppointmentForm
-            basicLayoutComponent={BasicLayout}
-            textEditorComponent={TextEditor}
-            // Monthlyとか選ぶやつ
-            // selectComponent={SelectComponent}
-            // 削除、保存、キャンセルのボタン
-            // commandButtonComponent
+            <Appointments
+              appointmentComponent={Appointment}
+              appointmentContentComponent={AppointmentContent}
+            />
+            {/* アポクリックで、表示するモーダル */}
+            <AppointmentTooltip
+              // 表示するアイコン 内容も変えられそう
+              showCloseButton
+              showDeleteButton
+              showOpenButton
+            />
+            {/* アポを編集するフォームが出る これに何を載せるか考えたい */}
+            <AppointmentForm
+              basicLayoutComponent={BasicLayout}
+              textEditorComponent={TextEditor}
+              // selectComponent={SelectComponent}
+              // commandButtonComponent
 
-            // booleanEditorComponent={BooleanEditor}
-            recurrenceLayoutComponent={() => null}
-            // recurrenceLayoutComponent={RecurrenceLayout}
-            // resourceEditorComponent={ResourceEditor}
-            messages={appo_form_messages}
-          />
+              // booleanEditorComponent={BooleanEditor}
+              recurrenceLayoutComponent={() => null}
+              // recurrenceLayoutComponent={RecurrenceLayout}
+              // resourceEditorComponent={ResourceEditor}
+              messages={appo_form_messages}
+            />
 
-          <Resources data={resources} />
+            <Resources data={resources} />
 
-          {/* ドラッグドロップ必要か？ */}
-          {/* <DragDropProvider /> */}
+            {/* ドラッグドロップ必要か？ */}
+            {/* <DragDropProvider /> */}
 
-          {/* <CurrentTimeIndicator
+            {/* <CurrentTimeIndicator
             // updateInterval={}
             /> */}
 
-          {/* <ViewSwitcher/> */}
-        </Scheduler>
-      </Paper>
+            {/* <ViewSwitcher/> */}
+          </Scheduler>
+        </Paper>
+      </Container>
     )
   }
 }
