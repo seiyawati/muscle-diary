@@ -72,6 +72,10 @@ const SignInSide = (props) => {
       })
   }
 
+  const alertNotSupport = () => {
+    alert('現在対応しておりません。')
+  }
+
   const classes = useStyles()
 
   return (
@@ -94,10 +98,20 @@ const SignInSide = (props) => {
           >
             <span style={{ fontSize: 16 }}>Googleでログイン</span>
           </GoogleLoginButton>
-          <TwitterLoginButton align="center" iconSize={'20px'} size={'40px'}>
+          <TwitterLoginButton
+            align="center"
+            iconSize={'20px'}
+            size={'40px'}
+            onClick={() => alertNotSupport()}
+          >
             <span style={{ fontSize: 16 }}>Twitterでログイン</span>
           </TwitterLoginButton>
-          <FacebookLoginButton align="center" iconSize={'20px'} size={'40px'}>
+          <FacebookLoginButton
+            align="center"
+            iconSize={'20px'}
+            size={'40px'}
+            onClick={() => alertNotSupport()}
+          >
             <span style={{ fontSize: 16 }}>Facebookでログイン</span>
           </FacebookLoginButton>
           <form className={classes.form} noValidate>
