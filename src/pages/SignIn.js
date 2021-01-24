@@ -4,14 +4,8 @@ import firebase from '../plugins/firebase'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import {
   Avatar,
-  Button,
   CssBaseline,
-  TextField,
-  FormControlLabel,
-  Checkbox,
-  Link,
   Paper,
-  Box,
   Grid,
   Typography,
 } from '@material-ui/core'
@@ -21,7 +15,7 @@ import {
   FacebookLoginButton,
 } from 'react-social-login-buttons'
 import { makeStyles } from '@material-ui/core/styles'
-import { Copyright } from '../components/Atoms'
+import Form from '../components/Atoms/Form'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -73,7 +67,7 @@ const SignInSide = (props) => {
   }
 
   const alertNotSupport = () => {
-    alert('現在対応しておりません。')
+    alert('現在ご利用できません。')
   }
 
   const classes = useStyles()
@@ -114,58 +108,7 @@ const SignInSide = (props) => {
           >
             <span style={{ fontSize: 16 }}>Facebookでログイン</span>
           </FacebookLoginButton>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="メールアドレス"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="パスワード"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="パスワードを保存する"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              ログイン
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  パスワードをお忘れですか？
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {'アカウントをお持ちでない方は登録してください。'}
-                </Link>
-              </Grid>
-            </Grid>
-            <Box mt={5}>
-              <Copyright />
-            </Box>
-          </form>
+          <Form />
         </div>
       </Grid>
     </Grid>
