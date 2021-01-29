@@ -45,23 +45,3 @@ jobs:
         with:
           name: build
           path: build
-  deploy:
-    name: Deploy
-    # もし前段のbuildが通らなかったらこっちは動作しません
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      # ビルドした成果物を取り出します。pathの設定はuploadと合わせる必要があります
-      - name: Download Artifact
-        uses: actions/download-artifact@master
-        with:
-          name: build
-          path: build
-      - name: Deploy to Firebase
-        uses: w9jds/firebase-action@master
-        with:
-          args: deploy --only hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
