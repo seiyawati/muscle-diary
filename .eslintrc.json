@@ -1,20 +1,12 @@
 {
-  "extends": [
-    "eslint:recommended"
-  ],
+  "extends": ["eslint:recommended"],
   "plugins": [],
-  "parserOptions": {},
+  "parserOptions": { "sourceType": "module" },
   "env": {
     "es6": true
   },
   "globals": {},
   "rules": {
-    "semi": [
-      "error",
-      "never"
-    ]
-  },
-  "parserOptions": {
-    "sourceType": "module"
-  },
+    "semi": ["error", "never"]
+  }
 }
