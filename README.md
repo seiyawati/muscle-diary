@@ -4,6 +4,8 @@
 
 [筋肉体操](https://www.youtube.com/watch?v=xGnfPpjki34&list=PLcynJ47QaWNtO61AsyfgUKJyIGWuyY7Ir&index=5)の記録をつける日記アプリです。
 
+![demo](https://user-images.githubusercontent.com/60223961/107763662-5124d600-6d72-11eb-9dc8-d8b8265b01cf.png)
+
 ## release note
 
 - ログイン認証機能
