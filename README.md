@@ -1,26 +1,28 @@
-# Muscle Diary
+# foresky
 
-![Deploy](https://github.com/SasakiPeter/muscle_diary/workflows/Deploy/badge.svg?branch=main)
+オリジナルのバーチャル背景を作ることのできるアプリです。
 
-[筋肉体操](https://www.youtube.com/watch?v=xGnfPpjki34&list=PLcynJ47QaWNtO61AsyfgUKJyIGWuyY7Ir&index=5)の記録をつける日記アプリです。
-
-![demo](https://user-images.githubusercontent.com/60223961/107763662-5124d600-6d72-11eb-9dc8-d8b8265b01cf.png)
+![demo](https://user-images.githubusercontent.com/60223961/109839428-70849400-7c8a-11eb-9e22-8303d16d672c.png)
 
 ## release note
 
-- ログイン認証機能
-- カレンダーへの記録機能
+- 背景ジェネレーターの生成
+- 使い方の記載
 
 ## upcoming update
 
-- youtube 動画の視聴
-- 記録フォームの UX 向上
+- 背景パターンの選択
+- eslintとprettier
+- GitHubActionsによるCI/CD
+
 
 ## 使用技術
 
+- FW
+  - Next.js
+- State
+  - Recoil 
 - UI
   - Material-ui
-- DB
-  - firestore
-- 認証
-  - firebase authentication
+- ホスティング
+  - Vercel
